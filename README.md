@@ -8,5 +8,5 @@ Para realizar la conexion se utiliza un ``` new Anmat(); ```devuelve un proxy pa
 
 ### INFO
 
-El proyecto esta construido con maven y tiene construido una lista de objetos del anmat generado con ```mvn build jawaws:wsimport```
+El proyecto esta construido con maven y para generar una lista de los objetos del anmat utilizar ```mvn build jawaws:wsimport```
 WSDL - Servicio de trazabilidad
