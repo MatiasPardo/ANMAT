@@ -13,29 +13,29 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
-import com.inssjp.mywebservice.business.IWebService;
-import com.inssjp.mywebservice.business.IWebServicePortType;
+
+import com.inssjp.webservice.business.IWebService;
+import com.inssjp.webservice.business.IWebServiceService;
 
 
 public class Anmat {
 
 	private final static String  USER_HEADER = "testwservice";
 
-	public IWebServicePortType connect() throws MalformedURLException{
+	public IWebService connect() throws MalformedURLException{
 		
-		IWebService webService = new IWebService();
-        IWebServicePortType webServicePortType = webService.getIWebServicePort();
+		IWebService webService = new IWebServiceService().getIWebServicePort();
 
-        ConfigureHTTPSSoapHeaders(webServicePortType);
+        ConfigureHTTPSSoapHeaders(webService);
         
-        Client client = ClientProxy.getClient(webServicePortType);
+        Client client = ClientProxy.getClient(webService);
         client.getInInterceptors().add(new LoggingInInterceptor());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         
-       return webServicePortType;
+       return webService;
 	}
 	@SuppressWarnings({"unchecked" })
-	private void ConfigureHTTPSSoapHeaders(IWebServicePortType webService) {
+	private void ConfigureHTTPSSoapHeaders(IWebService webService) {
     	
 	    @SuppressWarnings("rawtypes")
 		Map outProps = new HashMap();

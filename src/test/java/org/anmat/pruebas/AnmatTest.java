@@ -19,7 +19,10 @@ import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.Assert;
 import org.junit.Test;
-import com.inssjp.mywebservice.business.*;
+import com.inssjp.webservice.business.IWebService;
+import com.inssjp.webservice.business.IWebServiceService;
+import com.inssjp.webservice.business.MedicoResponse;
+import com.inssjp.webservice.business.WebServiceError;
 
 
 public class AnmatTest {
@@ -28,18 +31,17 @@ public class AnmatTest {
 	@Test
 	public void testConexion() throws MalformedURLException {
 
-        IWebService webService = new IWebService();
-        IWebServicePortType webServicePortType = webService.getIWebServicePort();
+        IWebService webService = new IWebServiceService().getIWebServicePort();
 
-        ConfigureHTTPSSoapHeaders(webServicePortType);
+        ConfigureHTTPSSoapHeaders(webService);
         
-        Client client = ClientProxy.getClient(webServicePortType);
+        Client client = ClientProxy.getClient(webService);
         client.getInInterceptors().add(new LoggingInInterceptor());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         
-        WebServiceResult wsr = null;
+        MedicoResponse wsr = null;
         try	{
-        	wsr = webServicePortType.sendMedicamentos(this.crearMedicamento(), "pruebasws", "Clave1234");
+        	wsr = webService.getMedico("pruebasws", "Clave1234", "30711622507");
         	List<WebServiceError> lst_errores = wsr.getErrores();
 			for (int i=0; !wsr.isResultado() &&  i<lst_errores.size(); i++) {
 				System.out.println("[" + lst_errores.get(i).getCError() + "] " + lst_errores.get(i).getDError());
@@ -51,49 +53,15 @@ public class AnmatTest {
 	}
 	@Test
 	public void testConection() throws MalformedURLException {
-
+		
 		Assert.assertNotNull(new Anmat().connect());
 		
 	}
 	
-	public List<MedicamentosDTO> crearMedicamento(){
-		
-		List<MedicamentosDTO> medicamentos = new LinkedList<MedicamentosDTO>();
-		MedicamentosDTO medicamento1 = new MedicamentosDTO();
-		medicamento1.setFEvento("25/11/2011");
-		medicamento1.setHEvento("04:24");
-		medicamento1.setGlnOrigen("glnws");
-		medicamento1.setCuitOrigen("20267565393");
-		medicamento1.setGlnDestino("glnws");
-		medicamento1.setCuitDestino("20267565393");
-		medicamento1.setNRemito("1234");
-		medicamento1.setNFactura("1234");
-		medicamento1.setVencimiento("30/11/2011");
-		medicamento1.setGtin("GTIN1");
-		medicamento1.setLote("1111");
-		medicamento1.setIdEvento("127");
-		medicamento1.setApellido("Reingart");
-		medicamento1.setNombres("Mariano");
-		medicamento1.setTipoDocumento("96");
-		medicamento1.setNDocumento("26756539");
-		medicamento1.setSexo("M");
-		medicamento1.setDireccion("Saraza");
-		medicamento1.setLocalidad("Hurlingham");
-		medicamento1.setNumero("1234");
-		medicamento1.setPiso("");
-		medicamento1.setDepto("");
-		medicamento1.setNPostal("B1688FDD");
-		medicamento1.setProvincia("Buenos Aires");
-		medicamento1.setFechaNacimiento("01/01/2000");
-		medicamento1.setTelefono("5555-5555");
-		medicamentos.add(medicamento1);
-
-		return medicamentos;
-		
-	}
+	
 
 	@SuppressWarnings("unchecked")
-	private void ConfigureHTTPSSoapHeaders(IWebServicePortType webService) {
+	private void ConfigureHTTPSSoapHeaders(IWebService webService) {
     	
 	    @SuppressWarnings("rawtypes")
 		Map outProps = new HashMap();

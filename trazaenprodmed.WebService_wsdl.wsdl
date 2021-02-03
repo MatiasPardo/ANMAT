@@ -1,0 +1,512 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/wsdl/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://business.webservice.inssjp.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IWebServiceService" targetNamespace="http://business.webservice.inssjp.com/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://business.webservice.inssjp.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://business.webservice.inssjp.com/">
+<xs:element name="getCatalogoElectronicoByGLN" type="tns:getCatalogoElectronicoByGLN"/>
+<xs:element name="getCatalogoElectronicoByGLNResponse" type="tns:getCatalogoElectronicoByGLNResponse"/>
+<xs:element name="getCatalogoElectronicoByGTIN" type="tns:getCatalogoElectronicoByGTIN"/>
+<xs:element name="getCatalogoElectronicoByGTINResponse" type="tns:getCatalogoElectronicoByGTINResponse"/>
+<xs:element name="getMedico" type="tns:getMedico"/>
+<xs:element name="getMedicoResponse" type="tns:getMedicoResponse"/>
+<xs:element name="getTransaccionesWS" type="tns:getTransaccionesWS"/>
+<xs:element name="getTransaccionesWSResponse" type="tns:getTransaccionesWSResponse"/>
+<xs:element name="informarProducto" type="tns:informarProducto"/>
+<xs:element name="informarProductoResponse" type="tns:informarProductoResponse"/>
+<xs:element name="sendCancelacTransacc" type="tns:sendCancelacTransacc"/>
+<xs:element name="sendCancelacTransaccParcial" type="tns:sendCancelacTransaccParcial"/>
+<xs:element name="sendCancelacTransaccParcialResponse" type="tns:sendCancelacTransaccParcialResponse"/>
+<xs:element name="sendCancelacTransaccResponse" type="tns:sendCancelacTransaccResponse"/>
+<xs:complexType name="informarProducto">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="transacciones" type="tns:transaccionDTO"/>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="transaccionDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="apellidos" type="xs:string"/>
+<xs:element minOccurs="0" name="calle" type="xs:string"/>
+<xs:element minOccurs="0" name="codDiagnostico" type="xs:string"/>
+<xs:element minOccurs="0" name="codHiv" type="xs:string"/>
+<xs:element minOccurs="0" name="codPostal" type="xs:string"/>
+<xs:element minOccurs="0" name="cuitMedico" type="xs:string"/>
+<xs:element minOccurs="0" name="departamento" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaNacimiento" type="xs:string"/>
+<xs:element minOccurs="0" name="glnDestino" type="xs:string"/>
+<xs:element minOccurs="0" name="glnOrigen" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="idEvento" type="xs:long"/>
+<xs:element minOccurs="0" name="idMotivoDevolucion" type="xs:long"/>
+<xs:element minOccurs="0" name="idObraSocial" type="xs:long"/>
+<xs:element minOccurs="0" name="idTipoDocumento" type="xs:long"/>
+<xs:element minOccurs="0" name="localidad" type="xs:string"/>
+<xs:element minOccurs="0" name="lote" type="xs:string"/>
+<xs:element minOccurs="0" name="nombres" type="xs:string"/>
+<xs:element minOccurs="0" name="nroAfiliado" type="xs:string"/>
+<xs:element minOccurs="0" name="nroCalle" type="xs:long"/>
+<xs:element minOccurs="0" name="nroDocumento" type="xs:string"/>
+<xs:element minOccurs="0" name="nroFactura" type="xs:string"/>
+<xs:element minOccurs="0" name="nroRemito" type="xs:string"/>
+<xs:element minOccurs="0" name="nroSerial" type="xs:string"/>
+<xs:element minOccurs="0" name="otroMotivoDevolucion" type="xs:string"/>
+<xs:element minOccurs="0" name="piso" type="xs:string"/>
+<xs:element minOccurs="0" name="provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="sexo" type="xs:string"/>
+<xs:element minOccurs="0" name="telefono" type="xs:string"/>
+<xs:element minOccurs="0" name="vencimiento" type="xs:string"/>
+<xs:element minOccurs="0" name="fEvento" type="xs:string"/>
+<xs:element minOccurs="0" name="hEvento" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="informarProductoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:webServiceResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="webServiceResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="codigoTransaccion" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errores" nillable="true" type="tns:webServiceError"/>
+<xs:element minOccurs="0" name="resultado" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="webServiceError">
+<xs:sequence>
+<xs:element minOccurs="0" name="c_error" type="xs:string"/>
+<xs:element minOccurs="0" name="d_error" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getTransaccionesWS">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="idTransaccion" type="xs:long"/>
+<xs:element minOccurs="0" name="glnAgenteOrigen" type="xs:string"/>
+<xs:element minOccurs="0" name="glnAgenteDestino" type="xs:string"/>
+<xs:element minOccurs="0" name="glnAgenteInformador" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="lote" type="xs:string"/>
+<xs:element minOccurs="0" name="serie" type="xs:string"/>
+<xs:element minOccurs="0" name="idEvento" type="xs:long"/>
+<xs:element minOccurs="0" name="fechaOperacionDesde" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaOperacionHasta" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaTransaccionDesde" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaTransaccionHasta" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaVencimientoDesde" type="xs:string"/>
+<xs:element minOccurs="0" name="fechaVencimientoHasta" type="xs:string"/>
+<xs:element minOccurs="0" name="remito" type="xs:string"/>
+<xs:element minOccurs="0" name="factura" type="xs:string"/>
+<xs:element minOccurs="0" name="idProvincia" type="xs:long"/>
+<xs:element minOccurs="0" name="idEstadoTransaccion" type="xs:long"/>
+<xs:element minOccurs="0" name="pagina" type="xs:long"/>
+<xs:element minOccurs="0" name="offset" type="xs:long"/>
+<xs:element minOccurs="0" name="orderBy" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getTransaccionesWSResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:transaccionesResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="transaccionesResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="cantPaginas" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errores" nillable="true" type="tns:webServiceError"/>
+<xs:element minOccurs="0" name="hay_error" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="tns:transaccionWSDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="transaccionWSDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="codDiagnostico" type="xs:string"/>
+<xs:element minOccurs="0" name="descDiagnostico" type="xs:string"/>
+<xs:element minOccurs="0" name="descEstado" type="xs:string"/>
+<xs:element minOccurs="0" name="descMotivoDevolucion" type="xs:string"/>
+<xs:element minOccurs="0" name="descProducto" type="xs:string"/>
+<xs:element minOccurs="0" name="glnDestino" type="xs:string"/>
+<xs:element minOccurs="0" name="glnOrigen" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="idDetalleEvento" type="xs:long"/>
+<xs:element minOccurs="0" name="idEstado" type="xs:long"/>
+<xs:element minOccurs="0" name="idMotivoDevolucion" type="xs:long"/>
+<xs:element minOccurs="0" name="idTransaccion" type="xs:string"/>
+<xs:element minOccurs="0" name="idTransaccionGlobal" type="xs:string"/>
+<xs:element minOccurs="0" name="lote" type="xs:string"/>
+<xs:element minOccurs="0" name="medicoCuit" type="xs:string"/>
+<xs:element minOccurs="0" name="medicoNombres" type="xs:string"/>
+<xs:element minOccurs="0" name="nombre" type="xs:string"/>
+<xs:element minOccurs="0" name="nroFactura" type="xs:string"/>
+<xs:element minOccurs="0" name="nroRemito" type="xs:string"/>
+<xs:element minOccurs="0" name="nroSerial" type="xs:string"/>
+<xs:element minOccurs="0" name="otroMotivoDevolucion" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteApellido" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteCalle" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteCodPostal" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteCodigoObraSocial" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteCodigoTipoDocumento" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteDepartamento" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteDescObraSocial" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteDescTipoDocumento" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteFechaNacimiento" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteLocalidad" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteNombres" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteNroAfiliado" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteNroCalle" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteNroDocumento" type="xs:string"/>
+<xs:element minOccurs="0" name="pacientePiso" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteProvincia" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteSexo" type="xs:string"/>
+<xs:element minOccurs="0" name="pacienteTelefono" type="xs:string"/>
+<xs:element minOccurs="0" name="razonSocialDestino" type="xs:string"/>
+<xs:element minOccurs="0" name="razonSocialInformador" type="xs:string"/>
+<xs:element minOccurs="0" name="razonSocialOrigen" type="xs:string"/>
+<xs:element minOccurs="0" name="transacProvincia" type="xs:string"/>
+<xs:element minOccurs="0" name="vencimiento" type="xs:string"/>
+<xs:element minOccurs="0" name="dEvento" type="xs:string"/>
+<xs:element minOccurs="0" name="fEvento" type="xs:string"/>
+<xs:element minOccurs="0" name="fTransaccion" type="xs:string"/>
+<xs:element minOccurs="0" name="hEvento" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCatalogoElectronicoByGLN">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="gln" type="xs:string"/>
+<xs:element minOccurs="0" name="cuit" type="xs:string"/>
+<xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+<xs:element minOccurs="0" name="idProvincia" type="xs:long"/>
+<xs:element minOccurs="0" name="idTipoAgente" type="xs:long"/>
+<xs:element minOccurs="0" name="pagina" type="xs:long"/>
+<xs:element minOccurs="0" name="offset" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCatalogoElectronicoByGLNResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:catalogoGLNResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="catalogoGLNResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="cantPaginas" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="erroresWS" nillable="true" type="tns:webServiceError"/>
+<xs:element minOccurs="0" name="hay_error" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="lstAgentes" nillable="true" type="tns:agenteDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="agenteDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="codigo_postal" type="xs:string"/>
+<xs:element minOccurs="0" name="cuit" type="xs:string"/>
+<xs:element minOccurs="0" name="departamento" type="xs:string"/>
+<xs:element minOccurs="0" name="direccion" type="xs:string"/>
+<xs:element minOccurs="0" name="email" type="xs:string"/>
+<xs:element minOccurs="0" name="entre_calle_1" type="xs:string"/>
+<xs:element minOccurs="0" name="entre_calle_2" type="xs:string"/>
+<xs:element minOccurs="0" name="fecha_alta" type="xs:string"/>
+<xs:element minOccurs="0" name="fecha_baja" type="xs:string"/>
+<xs:element minOccurs="0" name="fecha_ult_modificacion" type="xs:string"/>
+<xs:element minOccurs="0" name="gln" type="xs:string"/>
+<xs:element minOccurs="0" name="gln_principal" type="xs:string"/>
+<xs:element minOccurs="0" name="id_localidad" type="xs:string"/>
+<xs:element minOccurs="0" name="id_provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="id_tipo_agente" type="xs:string"/>
+<xs:element minOccurs="0" name="nombre_localidad" type="xs:string"/>
+<xs:element minOccurs="0" name="nombre_provincia" type="xs:string"/>
+<xs:element minOccurs="0" name="nombre_tipo_agente" type="xs:string"/>
+<xs:element minOccurs="0" name="numero" type="xs:string"/>
+<xs:element minOccurs="0" name="piso" type="xs:string"/>
+<xs:element minOccurs="0" name="razon_social" type="xs:string"/>
+<xs:element minOccurs="0" name="razon_social_principal" type="xs:string"/>
+<xs:element minOccurs="0" name="telefono" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendCancelacTransacc">
+<xs:sequence>
+<xs:element minOccurs="0" name="transaccion" type="xs:long"/>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendCancelacTransaccResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:webServiceResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMedico">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="cuit" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMedicoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:medicoResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="medicoResponse">
+<xs:complexContent>
+<xs:extension base="tns:webServiceResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="medico" type="tns:medicoDTO"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="medicoDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="apellidoNombre" type="xs:string"/>
+<xs:element minOccurs="0" name="cuit" type="xs:string"/>
+<xs:element minOccurs="0" name="idMedico" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="listaMatriculas" nillable="true" type="tns:matriculaMedicoDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="matriculaMedicoDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="idMatriculaMedico" type="xs:long"/>
+<xs:element minOccurs="0" name="nroMatricula" type="xs:string"/>
+<xs:element minOccurs="0" name="tipoMatricula" type="tns:tipoMatriculaDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="tipoMatriculaDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="descTipoMatricula" type="xs:string"/>
+<xs:element minOccurs="0" name="idTipoMatricula" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendCancelacTransaccParcial">
+<xs:sequence>
+<xs:element minOccurs="0" name="transaccion" type="xs:long"/>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="serie" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendCancelacTransaccParcialResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:webServiceResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCatalogoElectronicoByGTIN">
+<xs:sequence>
+<xs:element minOccurs="0" name="usuario" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="gln" type="xs:string"/>
+<xs:element minOccurs="0" name="marca" type="xs:string"/>
+<xs:element minOccurs="0" name="modelo" type="xs:string"/>
+<xs:element minOccurs="0" name="idNombreGenerico" type="xs:long"/>
+<xs:element minOccurs="0" name="cuit" type="xs:string"/>
+<xs:element minOccurs="0" name="pagina" type="xs:long"/>
+<xs:element minOccurs="0" name="offset" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCatalogoElectronicoByGTINResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:catalogoGTINResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="catalogoGTINResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="cantPaginas" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="erroresWS" nillable="true" type="tns:webServiceError"/>
+<xs:element minOccurs="0" name="hay_error" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="lstProductos" nillable="true" type="tns:productoDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="productoDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="certificadoAnmat" type="xs:string"/>
+<xs:element minOccurs="0" name="dioptria" type="xs:string"/>
+<xs:element minOccurs="0" name="gtin" type="xs:string"/>
+<xs:element minOccurs="0" name="idProducto" type="xs:string"/>
+<xs:element minOccurs="0" name="marca" type="xs:string"/>
+<xs:element minOccurs="0" name="modelo" type="xs:string"/>
+<xs:element minOccurs="0" name="observacion" type="xs:string"/>
+<xs:element minOccurs="0" name="ultimoLoteGtin" type="xs:string"/>
+<xs:element minOccurs="0" name="unidades" type="xs:string"/>
+<xs:element minOccurs="0" name="vigenciaDdeAnmat" type="xs:string"/>
+<xs:element minOccurs="0" name="vigenciaDdeGtin" type="xs:string"/>
+<xs:element minOccurs="0" name="vigenciaHtaAnmat" type="xs:string"/>
+<xs:element minOccurs="0" name="vigenciaHtaGtin" type="xs:string"/>
+<xs:element minOccurs="0" name="dCondicionTrazabilidad" type="xs:string"/>
+<xs:element minOccurs="0" name="dNombreGenerico" type="xs:string"/>
+<xs:element minOccurs="0" name="dSoporteTrazabilidad" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTransaccionesWS">
+    <wsdl:part element="tns:getTransaccionesWS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCatalogoElectronicoByGLNResponse">
+    <wsdl:part element="tns:getCatalogoElectronicoByGLNResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCancelacTransaccParcialResponse">
+    <wsdl:part element="tns:sendCancelacTransaccParcialResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCatalogoElectronicoByGTIN">
+    <wsdl:part element="tns:getCatalogoElectronicoByGTIN" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTransaccionesWSResponse">
+    <wsdl:part element="tns:getTransaccionesWSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCancelacTransaccParcial">
+    <wsdl:part element="tns:sendCancelacTransaccParcial" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="informarProductoResponse">
+    <wsdl:part element="tns:informarProductoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMedicoResponse">
+    <wsdl:part element="tns:getMedicoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCatalogoElectronicoByGLN">
+    <wsdl:part element="tns:getCatalogoElectronicoByGLN" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCatalogoElectronicoByGTINResponse">
+    <wsdl:part element="tns:getCatalogoElectronicoByGTINResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCancelacTransaccResponse">
+    <wsdl:part element="tns:sendCancelacTransaccResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCancelacTransacc">
+    <wsdl:part element="tns:sendCancelacTransacc" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="informarProducto">
+    <wsdl:part element="tns:informarProducto" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMedico">
+    <wsdl:part element="tns:getMedico" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IWebService">
+    <wsdl:operation name="informarProducto">
+      <wsdl:input message="tns:informarProducto" name="informarProducto">
+    </wsdl:input>
+      <wsdl:output message="tns:informarProductoResponse" name="informarProductoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransaccionesWS">
+      <wsdl:input message="tns:getTransaccionesWS" name="getTransaccionesWS">
+    </wsdl:input>
+      <wsdl:output message="tns:getTransaccionesWSResponse" name="getTransaccionesWSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCatalogoElectronicoByGLN">
+      <wsdl:input message="tns:getCatalogoElectronicoByGLN" name="getCatalogoElectronicoByGLN">
+    </wsdl:input>
+      <wsdl:output message="tns:getCatalogoElectronicoByGLNResponse" name="getCatalogoElectronicoByGLNResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCancelacTransacc">
+      <wsdl:input message="tns:sendCancelacTransacc" name="sendCancelacTransacc">
+    </wsdl:input>
+      <wsdl:output message="tns:sendCancelacTransaccResponse" name="sendCancelacTransaccResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMedico">
+      <wsdl:input message="tns:getMedico" name="getMedico">
+    </wsdl:input>
+      <wsdl:output message="tns:getMedicoResponse" name="getMedicoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCancelacTransaccParcial">
+      <wsdl:input message="tns:sendCancelacTransaccParcial" name="sendCancelacTransaccParcial">
+    </wsdl:input>
+      <wsdl:output message="tns:sendCancelacTransaccParcialResponse" name="sendCancelacTransaccParcialResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCatalogoElectronicoByGTIN">
+      <wsdl:input message="tns:getCatalogoElectronicoByGTIN" name="getCatalogoElectronicoByGTIN">
+    </wsdl:input>
+      <wsdl:output message="tns:getCatalogoElectronicoByGTINResponse" name="getCatalogoElectronicoByGTINResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IWebServiceServiceSoapBinding" type="tns:IWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="informarProducto">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="informarProducto">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="informarProductoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCatalogoElectronicoByGLN">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCatalogoElectronicoByGLN">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCatalogoElectronicoByGLNResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransaccionesWS">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTransaccionesWS">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTransaccionesWSResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCancelacTransacc">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sendCancelacTransacc">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendCancelacTransaccResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMedico">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMedico">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMedicoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCancelacTransaccParcial">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sendCancelacTransaccParcial">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendCancelacTransaccParcialResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCatalogoElectronicoByGTIN">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCatalogoElectronicoByGTIN">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCatalogoElectronicoByGTINResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IWebServiceService">
+    <wsdl:port binding="tns:IWebServiceServiceSoapBinding" name="IWebServicePort">
+      <soap:address location="https://servicios.pami.org.ar/trazaenprodmed.WebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
