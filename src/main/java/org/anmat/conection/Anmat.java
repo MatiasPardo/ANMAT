@@ -2,6 +2,7 @@ package org.anmat.conection;
 
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,16 +38,20 @@ public class Anmat {
        return webService;
 	}
 	
-	public void procesarResponse(WebServiceResponse webServiceResponse) {
+	private List<String> procesarResponse(WebServiceResponse webServiceResponse) {
 		WebServiceResponse wsr = null;
+		List<String> errores = new LinkedList<String>();
         try	{
         	wsr = webServiceResponse;
         	List<WebServiceError> lst_errores = wsr.getErrores();
-			for (int i=0; !wsr.isResultado() &&  i<lst_errores.size(); i++) {
-				System.out.println("[" + lst_errores.get(i).getCError() + "] " + lst_errores.get(i).getDError());
+			for (int i=0; i < lst_errores.size(); i++) {
+				errores.add(lst_errores.get(i).getCError());
+				errores.add(lst_errores.get(i).getDError());
 			}
+			return errores;
         } catch (Exception e) {
         	e.printStackTrace();
+        	return null;
         }
 	}
 	

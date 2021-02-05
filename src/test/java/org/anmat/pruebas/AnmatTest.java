@@ -41,21 +41,28 @@ public class AnmatTest {
         client.getInInterceptors().add(new LoggingInInterceptor());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         
-        procesarResponse(webService.informarProducto(this.getTransacciones(), "pruebasws", "pruebasws"));
+        procesarResponse(webService.getMedico("pruebasws", "pruebasws", "20134739445"));
+        //procesarResponse(webService.getMedico("7798232400004", "Trazaisko1", "20134739445"));
+        //procesarResponse(webService.informarProducto(this.getTransacciones(), "7798232400004", "Trazaisko1"));
 		
 	}
-	private void procesarResponse(WebServiceResponse webServiceResponse) {
+	private List<String> procesarResponse(WebServiceResponse webServiceResponse) {
 		WebServiceResponse wsr = null;
+		List<String> errores = new LinkedList<String>();
         try	{
         	wsr = webServiceResponse;
         	List<WebServiceError> lst_errores = wsr.getErrores();
-			for (int i=0; !wsr.isResultado() &&  i<lst_errores.size(); i++) {
-				System.out.println("[" + lst_errores.get(i).getCError() + "] " + lst_errores.get(i).getDError());
+			for (int i=0; i < lst_errores.size(); i++) {
+				errores.add(lst_errores.get(i).getCError());
+				errores.add(lst_errores.get(i).getDError());
 			}
+			return errores;
         } catch (Exception e) {
         	e.printStackTrace();
+        	return null;
         }
 	}
+	
 	private List<TransaccionDTO> getTransacciones() {
 		List<TransaccionDTO> transacciones = new LinkedList<TransaccionDTO>();
 		TransaccionDTO transaccion = new TransaccionDTO();
