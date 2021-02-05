@@ -16,6 +16,8 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 
 import com.inssjp.webservice.business.IWebService;
 import com.inssjp.webservice.business.IWebServiceService;
+import com.inssjp.webservice.business.WebServiceError;
+import com.inssjp.webservice.business.WebServiceResponse;
 
 
 public class Anmat {
@@ -34,6 +36,20 @@ public class Anmat {
         
        return webService;
 	}
+	
+	public void procesarResponse(WebServiceResponse webServiceResponse) {
+		WebServiceResponse wsr = null;
+        try	{
+        	wsr = webServiceResponse;
+        	List<WebServiceError> lst_errores = wsr.getErrores();
+			for (int i=0; !wsr.isResultado() &&  i<lst_errores.size(); i++) {
+				System.out.println("[" + lst_errores.get(i).getCError() + "] " + lst_errores.get(i).getDError());
+			}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+	}
+	
 	@SuppressWarnings({"unchecked" })
 	private void ConfigureHTTPSSoapHeaders(IWebService webService) {
     	

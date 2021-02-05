@@ -22,7 +22,9 @@ import org.junit.Test;
 import com.inssjp.webservice.business.IWebService;
 import com.inssjp.webservice.business.IWebServiceService;
 import com.inssjp.webservice.business.MedicoResponse;
+import com.inssjp.webservice.business.TransaccionDTO;
 import com.inssjp.webservice.business.WebServiceError;
+import com.inssjp.webservice.business.WebServiceResponse;
 
 
 public class AnmatTest {
@@ -39,9 +41,13 @@ public class AnmatTest {
         client.getInInterceptors().add(new LoggingInInterceptor());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         
-        MedicoResponse wsr = null;
+        procesarResponse(webService.informarProducto(this.getTransacciones(), "pruebasws", "pruebasws"));
+		
+	}
+	private void procesarResponse(WebServiceResponse webServiceResponse) {
+		WebServiceResponse wsr = null;
         try	{
-        	wsr = webService.getMedico("pruebasws", "Clave1234", "30711622507");
+        	wsr = webServiceResponse;
         	List<WebServiceError> lst_errores = wsr.getErrores();
 			for (int i=0; !wsr.isResultado() &&  i<lst_errores.size(); i++) {
 				System.out.println("[" + lst_errores.get(i).getCError() + "] " + lst_errores.get(i).getDError());
@@ -49,7 +55,25 @@ public class AnmatTest {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+	}
+	private List<TransaccionDTO> getTransacciones() {
+		List<TransaccionDTO> transacciones = new LinkedList<TransaccionDTO>();
+		TransaccionDTO transaccion = new TransaccionDTO();
+		transaccion.setFEvento("17-nov-20");
+		transaccion.setHEvento("11:17");
+		transaccion.setIdEvento(50L);
+		transaccion.setGlnOrigen("7798232400004");
+		transaccion.setGtin("05029867691614");
+		transaccion.setNroSerial("10914424659");
+		transaccion.setNroRemito("R0004-00046594");
+		transaccion.setNroFactura("");
+		transaccion.setGlnDestino("9960110390006");
+		transaccion.setLote("724");
+		transaccion.setVencimiento("07/10/2024");
 		
+		transacciones.add(transaccion);
+		
+		return transacciones;
 	}
 	@Test
 	public void testConection() throws MalformedURLException {
